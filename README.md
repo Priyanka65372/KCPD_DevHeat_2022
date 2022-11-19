@@ -195,7 +195,7 @@ profitability.
 
 ## Credits and Social Media 
 
-```bash
+
 
    Mala. Neeraj Srinivas - Frontend and Backend 
 
@@ -204,9 +204,7 @@ profitability.
    Instagram - ( https://www.instagram.com/sri_bangaru_568/ )
 
 
-```
 
-```bash
 
    Kethavath Surender Rathod - Designer 
 
@@ -215,9 +213,7 @@ profitability.
    Instagram - ( https://instagram.com/surendhar__rathod?igshid=MTg0ZDhmNDA= )
 
 
-``` 
 
-```bash
 
    Sujal Tiwari - Content Writer and Resource Gatherer
 
@@ -226,7 +222,7 @@ profitability.
    Instagram - ( https://instagram.com/sujal_tiwari_11?igshid=YmMyMTA2M2Y= )
 
 
-```
+
 
 ```bash
            Thank you everyone for going through our project  : )
