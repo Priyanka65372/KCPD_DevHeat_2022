@@ -22,27 +22,27 @@ if(isset($_POST['submit']))
 	
 	if(isset($_GET['editid']))
 	{
-		$sql ="UPDATE article SET `article_type`='$_POST[articletype]', `publish_date`='$_POST[publishdate]', `title`='$_POST[title]', `article_description`='$_POST[description]', `article_img1`='$imgname1', `article_img2`='$imgname2', `article_img3`='$imgname3', `article_img4`='$imgname4', `article_img5`='$imgname5', `status`='$_POST[status]' where article_id='$_GET[editid]'";
+		$sql ="UPDATE record SET `record_type`='$_POST[recordtype]', `publish_date`='$_POST[publishdate]', `title`='$_POST[title]', `record_description`='$_POST[description]', `record_img1`='$imgname1', `record_img2`='$imgname2', `record_img3`='$imgname3', `record_img4`='$imgname4', `record_img5`='$imgname5', `status`='$_POST[status]' where record_id='$_GET[editid]'";
 		if(!mysqli_query($con,$sql))
 		{
 			echo "Error in mysqli query";
 		}
 		else
 		{
-			echo "<script>alert('Article record updated successfully...');</script>";
+			echo "<script>alert('Record updated successfully...');</script>";
 		}
 	}
 	else
 	{
 		$description = mysqli_real_escape_string($con, $_POST['description']);
-	$sql="INSERT INTO `article`(`article_id`, `article_type`, `publish_date`, `title`, `article_description`, `article_img1`, `article_img2`, `article_img3`, `article_img4`, `article_img5`, `status`) VALUES ('','$_POST[articletype]','$_POST[publishdate]','$_POST[title]','$description','$imgname1','$imgname2','$imgname3','$imgname4','$imgname5','Active')";
+	$sql="INSERT INTO `record`(`record_id`, `record_type`, `publish_date`, `title`, `record_description`, `record_img1`, `record_img2`, `record_img3`, `record_img4`, `record_img5`, `status`) VALUES ('','$_POST[recordtype]','$_POST[publishdate]','$_POST[title]','$description','$imgname1','$imgname2','$imgname3','$imgname4','$imgname5','Active')";
 	if(!mysqli_query($con,$sql))
 		{
 			echo "Error in mysqli query" . mysqli_error($con);
 		}
 		else
 		{
-			echo "<script>alert('Article record inserted successfully...');</script>";
+			echo "<script>alert('Record inserted successfully...');</script>";
 		}
 	}
 }
@@ -51,7 +51,7 @@ $randnumber = rand();
 $_SESSION['randnumber'] = $randnumber;
 if(isset($_GET['editid']))
 {
-	$sql = "SELECT * FROM article WHERE article_id='$_GET[editid]'";
+	$sql = "SELECT * FROM record WHERE record_id='$_GET[editid]'";
 	$qsql = mysqli_query($con,$sql);
 	$rsedit = mysqli_fetch_array($qsql);
 }
@@ -65,7 +65,7 @@ if(isset($_GET['editid']))
 
         <div class="text-center" data-aos="zoom-in">
 		<br><br>
-          <h3>Article</h3>
+          <h3>Record</h3>
         </div>
 
       </div>
@@ -81,22 +81,22 @@ if(isset($_GET['editid']))
           <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
             <div class="info mt-4 ">
 			
-		<center><h4>Enter Article Detail...</h4></center><hr>
+		<center><h4>Enter Record Detail...</h4></center><hr>
 
-<form method="post" action="" enctype="multipart/form-data" name="frmarticle" onSubmit="return validatearticle()">
+<form method="post" action="" enctype="multipart/form-data" name="frmrecord" onSubmit="return validaterecord()">
 <input type="hidden" name="randnumber" value="<?php echo $randnumber; ?>" >
 				  
 <div class="form-row">
 	<div class="col-md-6 form-group">
-	Article Type <font color="#FF0000">*</font>
-	  <select name="articletype" id="articletype" autofocus class="form-control" >
-		<option value="">Select Article Type</option>
+	Record Type <font color="#FF0000">*</font>
+	  <select name="recordtype" id="recordtype" autofocus class="form-control" >
+		<option value="">Select Record Type</option>
 		  <?php
-		  $arr= array("Blog","News");
+		  $arr= array("Event","Competition");
 		  $i=1;
 		  foreach($arr as $val)
 		  {
-			  if($rsedit['article_type'] == $val)
+			  if($rsedit['record_type'] == $val)
 			  {
 			  echo "<option value='$val' selected >$val</option>";
 			  }
@@ -121,7 +121,7 @@ if(isset($_GET['editid']))
 	
 	<div class="col-md-12 form-group">
 	Description <font color="#FF0000">*</font>
-	  <textarea  name="description" id="description" class="form-control" ><?php echo $rsedit['article_description']; ?></textarea>
+	  <textarea  name="description" id="description" class="form-control" ><?php echo $rsedit['record_description']; ?></textarea>
 	</div>	
 	
 	
@@ -167,30 +167,30 @@ if(isset($_GET['editid']))
 include("footer.php");
 ?>
 	<script type="application/javascript">
-	function validatearticle()
+	function validaterecord()
 	{
-				if(document.frmarticle.articletype.value == "")
+				if(document.frmrecord.recordtype.value == "")
 				{
-					alert("Kindly select an article type..");
-					document.frmarticle.articletype.focus();
+					alert("Kindly select an record type..");
+					document.frmrecord.recordtype.focus();
 					return false;
 				}
-					else if(document.frmarticle.publishdate.value == "")
+					else if(document.frmrecord.publishdate.value == "")
 				{
 					alert("Kindly select a date..");
-					document.frmarticle.publishdate.focus();
+					document.frmrecord.publishdate.focus();
 					return false;
 				}
-				else if(document.frmarticle.title.value == "")
+				else if(document.frmrecord.title.value == "")
 				{
 					alert("Title should not be blank..");
-					document.frmarticle.title.focus();
+					document.frmrecord.title.focus();
 					return false;
 				}	
-				else if(document.frmarticle.img1.value == "")
+				else if(document.frmrecord.img1.value == "")
 				{
 					alert("Kindly upload at least one image.");
-					document.frmarticle.img1.focus();
+					document.frmrecord.img1.focus();
 					return false;
 				}	
 				else
